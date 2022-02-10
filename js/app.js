@@ -27,12 +27,14 @@ gameBoard = [
 
 
 let boardEl = document.querySelector('.container')
-let tester = document.querySelector('#tester')
+let allSquares = document.querySelectorAll('.square')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+boardEl.addEventListener('click', function (evt) {
+  console.log(evt.target.value)
+})
 
 
 
@@ -40,13 +42,19 @@ let tester = document.querySelector('#tester')
 
 /*-------------------------------- Functions --------------------------------*/
 
+function init() {
+  createGrid()
+  //needs to map the information from gameBoard to allSquares
 
-function createGrid() {
-  let suare = document.createElement
+
 }
 
 
-// this creates the game board dom from the array [row][column]
+init()
+
+
+function createGrid() {
+  // this creates the game board dom from the array [row][column]
 gameBoard.forEach(function (row, idx) {
   row.forEach(function (square, i) {
     let newSquare = document.createElement('div')
@@ -54,9 +62,11 @@ gameBoard.forEach(function (row, idx) {
     newSquare.id = `square-${idx}-${i}`
     // boardEl.appendChild(newSquare)
     boardEl.appendChild(newSquare)
+    
   })
 
 })
+}
 
 
 
@@ -65,7 +75,10 @@ gameBoard.forEach(function (row, idx) {
 
 
 
-console.log(gameBoard[5][5])
+
+
+
+
 
 
 
