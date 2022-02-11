@@ -9,7 +9,7 @@
 /*---------------------------- Variables (state) ----------------------------*/
 //possible values 0 is covered no bomb, -1 covered bomb, 1-8 neighber bombs
 gameBoard = [
-[1, 2, 3, 4, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -86,14 +86,36 @@ function generateMineIndex() {
   
 }
 
-console.log(mineLocations);
+// console.log(mineLocations);
 
 function setMines() {
   generateMineIndex()
+
+  mineLocations.forEach(mine => {
+    if (mine < 10){
+        console.log(mine)
+        gameBoard[0][mine]= -1 }
+
+    if (mine >= 10) {
+      mineString = mine.toString()
+      console.log(mineString);
+      gameBoard[mineString[0]][mineString[1]] = -1
+    }
+    
+  })
+
+
+  // gameBoard.forEach(row => {
+  //   row.forEach(square =>{
+  //     console.log(square)
+  //   })
+  // })
+
 }
 
 
 
+console.log(gameBoard);
 
 
 // console.log(mineLocations);
