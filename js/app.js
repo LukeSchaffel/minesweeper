@@ -24,6 +24,7 @@ let mineLocations = []
 
 
 
+
 /*------------------------ Cached Element References ------------------------*/
 
 
@@ -34,9 +35,7 @@ let allSquares = document.querySelectorAll('.square')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-boardEl.addEventListener('click', function (evt) {
-  handleClick(evt)
-})
+boardEl.addEventListener('click', handleClick)
 
 
 
@@ -46,7 +45,7 @@ boardEl.addEventListener('click', function (evt) {
 
 function init() {
   setMines()
-  createGrid()
+  renderGameBoard()
   // render()
   
 }
@@ -56,7 +55,7 @@ init()
 
 
 
-function createGrid() {
+function renderGameBoard() {
   // this creates the game board dom from the array [row][column]
 gameBoard.forEach(function (row, idx) {
   row.forEach(function (square, i) {
@@ -92,12 +91,13 @@ function setMines() {
   generateMineIndex()
 
   mineLocations.forEach(mine => {
-    mine < 10 ? gameBoard[0][mine]= -1 :mineString = mine.toString() 
+    mine < 10 ? gameBoard[0][mine]= -1 : mineString = mine.toString() 
     gameBoard[mineString[0]][mineString[1]] = -1
    
   })
 
 }
+
 
 
 
@@ -108,8 +108,39 @@ console.log(gameBoard);
 
 
 function handleClick(evt) {
-  console.log(evt.target.value);
+  let clickedSquare = evt.target
+  clickedSquare.value === -1 ? gameOver() : checkNeighbor();
+
+
+
+
+  console.log(clickedSquare.value);
+  
+
+  
+  
 }
+
+function gameOver() {
+  console.log('you lose');
+}
+
+
+function checkNeighbor() {
+  
+}
+
+
+// let checkForBomb = () => clickedSquare.value === -1 ? console.log('boom') : console.log('reee');
+
+
+// function checkNeighbors(evt) {
+  
+//   console.log(clickedSquare);
+// }
+
+
+
 
 
 function render() {
