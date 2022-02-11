@@ -1,3 +1,9 @@
+/* font-family: 'Gideon Roman', cursive;
+font-family: 'Rowdies', cursive;
+font-family: 'Shizuru', cursive; */
+
+
+
 html {
   box-sizing: border-box
 }
@@ -27,7 +33,7 @@ body {
  
  size: 1vh;
   text-align: center;
-  
+background-color: rgba(77, 75, 74, 0.523);  
   
 }
 
@@ -61,13 +67,25 @@ main  {
 
 }
 
+header {
+  
+}
+
 h1 {
-  margin: 50px auto;
+  margin: 50px auto 0;
+  font-size: 7rem;
+  font-family: 'Rowdies', cursive;
+}
+
+h2 {
+  
+
 }
 
 .square {
   border: solid black 1px;
-  background-color: red;
+  background-color: rgba(106, 67, 182, 0.844);
   width: 50px;
-  height: 50px
+  height: 50px;
+  border-radius: 10%;
 }
