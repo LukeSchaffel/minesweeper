@@ -8,7 +8,7 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
 //possible values 0 is covered no bomb, -1 covered bomb, 1-8 neighber bombs
-gameBoard = [
+let gameBoard = [
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -45,8 +45,8 @@ boardEl.addEventListener('click', function (evt) {
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-  createGrid()
   setMines()
+  createGrid()
   // render()
   
 }
@@ -92,24 +92,10 @@ function setMines() {
   generateMineIndex()
 
   mineLocations.forEach(mine => {
-    if (mine < 10){
-        console.log(mine)
-        gameBoard[0][mine]= -1 }
-
-    if (mine >= 10) {
-      mineString = mine.toString()
-      console.log(mineString);
-      gameBoard[mineString[0]][mineString[1]] = -1
-    }
-    
+    mine < 10 ? gameBoard[0][mine]= -1 :mineString = mine.toString() 
+    gameBoard[mineString[0]][mineString[1]] = -1
+   
   })
-
-
-  // gameBoard.forEach(row => {
-  //   row.forEach(square =>{
-  //     console.log(square)
-  //   })
-  // })
 
 }
 
@@ -118,14 +104,11 @@ function setMines() {
 console.log(gameBoard);
 
 
-// console.log(mineLocations);
+
 
 
 function handleClick(evt) {
   console.log(evt.target.value);
-  if (evt.target.value === undefined) {
-    console.log(evt.value)
-  }
 }
 
 
