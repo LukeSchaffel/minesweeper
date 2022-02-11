@@ -71,24 +71,30 @@ gameBoard.forEach(function (row, idx) {
 })
 }
 
-function setMines() {
-  
-}
-
-
-
-
-
-
 
 function generateMineIndex() {
   let numMines = 10
-  for (let i = 0; i < numMines; i++) {
+  let x
+  if (!mineLocations.includes(x)) {
+    for (let i = 0; i < numMines; i++) {
     let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
     mineLocations.push(x)
-  }
+    }
+  } 
+  
+  
   
 }
+
+console.log(mineLocations);
+
+function setMines() {
+  generateMineIndex()
+}
+
+
+
+
 
 // console.log(mineLocations);
 
