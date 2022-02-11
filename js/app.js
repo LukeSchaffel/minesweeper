@@ -7,9 +7,9 @@
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-//possible values 0 is
+//possible values 0 is covered no bomb, -1 covered bomb, 1-8 neighber bombs
 gameBoard = [
-[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[1, 2, 3, 4, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -28,12 +28,13 @@ gameBoard = [
 
 let boardEl = document.querySelector('.container')
 let allSquares = document.querySelectorAll('.square')
+let allSquaresArr = Array.from(allSquares)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 boardEl.addEventListener('click', function (evt) {
-  console.log(evt.target)
+  handleClick(evt)
 })
 
 
@@ -44,13 +45,15 @@ boardEl.addEventListener('click', function (evt) {
 
 function init() {
   createGrid()
-  //needs to map the information from gameBoard to allSquares
-
-
+  // mapBoardValue()
+  // makeBombs()
+  // render()
+  
 }
 
 
 init()
+
 
 
 function createGrid() {
@@ -60,7 +63,7 @@ gameBoard.forEach(function (row, idx) {
     let newSquare = document.createElement('div')
     newSquare.className = "square"
     newSquare.id = `square-${idx}-${i}`
-    // boardEl.appendChild(newSquare)
+    newSquare.value = square
     boardEl.appendChild(newSquare)
     
   })
@@ -70,18 +73,42 @@ gameBoard.forEach(function (row, idx) {
 
 
 
+// function mapBoardValue() {
+//   gameBoard.forEach(function (row, i1) {
+//     row.forEach(function (square, i2) {
+//       // allSquares[i1][i2].value = square[i1][i2]
+//       allSquares[i1, i2].value = square
+//       console.log(allSquares[i1, i2].value);
+//     })
+//   })
+  
+  
+// }
+
+
+// function mapBoardValue() {
+//   allSquaresArr.forEach(function (row, i1) {
+//     row.forEach(function (square, i2) {
+//       console.log(square);
+//       // allSquares[i1][i2].value = square[i1][i2]
+//       allSquaresArr[i1, i2] = square
+//       console.log(allSquaresArr[i1, i2]);
+//     })
+//   })
+  
+// }
 
 
 
 
+function handleClick(evt) {
+  console.log(evt.target.value);
+  if (evt.target.value === undefined) {
+    console.log(evt.value)
+  }
+}
 
 
-
-
-
-
-
-
-
-
-
+function render() {
+  
+}
