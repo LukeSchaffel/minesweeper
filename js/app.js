@@ -19,6 +19,7 @@ gameBoard = [
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+let mineLocations = []
 
 
 
@@ -28,7 +29,7 @@ gameBoard = [
 
 let boardEl = document.querySelector('.container')
 let allSquares = document.querySelectorAll('.square')
-let allSquaresArr = Array.from(allSquares)
+// let allSquaresArr = Array.from(allSquares)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -45,8 +46,7 @@ boardEl.addEventListener('click', function (evt) {
 
 function init() {
   createGrid()
-  // mapBoardValue()
-  // makeBombs()
+  setMines()
   // render()
   
 }
@@ -70,6 +70,55 @@ gameBoard.forEach(function (row, idx) {
 
 })
 }
+
+function setMines() {
+  
+}
+
+
+
+
+
+
+
+function generateMineIndex() {
+  let numMines = 10
+  for (let i = 0; i < numMines; i++) {
+    let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
+    mineLocations.push(x)
+  }
+  
+}
+
+// console.log(mineLocations);
+
+
+function handleClick(evt) {
+  console.log(evt.target.value);
+  if (evt.target.value === undefined) {
+    console.log(evt.value)
+  }
+}
+
+
+function render() {
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,18 +146,3 @@ gameBoard.forEach(function (row, idx) {
 //   })
   
 // }
-
-
-
-
-function handleClick(evt) {
-  console.log(evt.target.value);
-  if (evt.target.value === undefined) {
-    console.log(evt.value)
-  }
-}
-
-
-function render() {
-  
-}
