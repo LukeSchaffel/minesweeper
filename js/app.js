@@ -20,6 +20,7 @@ let gameBoard = [
 ]
 
 let mineLocations = []
+let winner
 
 
 
@@ -31,7 +32,7 @@ let mineLocations = []
 let boardEl = document.querySelector('.container')
 let allSquares = document.querySelectorAll('.square')
 // let allSquaresArr = Array.from(allSquares)
-
+let messageEl = document.getElementById('message')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -46,7 +47,9 @@ boardEl.addEventListener('click', handleClick)
 function init() {
   setMines()
   renderGameBoard()
-  // render()
+  winner = null
+
+  render()
   
 }
 
@@ -61,7 +64,7 @@ gameBoard.forEach(function (row, idx) {
   row.forEach(function (square, i) {
     let newSquare = document.createElement('div')
     newSquare.className = "square"
-    newSquare.id = `square-${idx}-${i}`
+    newSquare.id = `${idx}${i}`
     newSquare.value = square
     boardEl.appendChild(newSquare)
     
@@ -111,13 +114,17 @@ function handleClick(evt) {
   let clickedSquare = evt.target
   checkForMine(evt)
   // clickedSquare.value === -1 ? gameOver() : checkNeighbor();
-
-  console.log(clickedSquare.value);
+  checkNeighbor(evt)
+  // console.log(clickedSquare.value);
   
 }
 
 function checkForMine(evt) {
-  console.log(evt.target.value)
+  if (evt.target.value === -1) {
+    console.log('boom');
+    winner = false
+    return
+  }
 }
 
 
@@ -127,8 +134,46 @@ function gameOver() {
 
 
 function checkNeighbor(evt) {
-  console.log(clickedSquare.value)
+  let neighbors = []
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  neighbors.push(y-1, x-1) //North West Neighbor
+  neighbors.push(y-1, x) //North Neighbor
+  neighbors.push(y-1, x+1) //North East Neighbor
+  neighbors.push(y, x-1) //West Neighbor
+  neighbors.push(y, x+1) //East Neighbor
+  neighbors.push(y+1, x-1) //South West Neighbor
+  neighbors.push(y+1, x) //South Neighbor
+  neighbors.push(y+1, x+1) //South East Neighbor
+  console.log(neighbors);
+  
+
+  // checkN(evt)
+  // checkNE(evt)
+  // checkE(evt)
+  // checkSE(evt)
+  // checkS(evt)
+  // checkSW(evt)
+  // checkW(evt)
+  // checkNW(evt)
 }
+
+function checkN(evt) {
+  
+  let x = evt.target.id[1]
+  let y = evt.target.id[0]
+  let clickedCordinates = gameBoard[y][x]
+  if (y===0){
+    return
+  } else {
+    let newY = y - 1
+    console.log(gameBoard[newY][x]);
+  }
+  
+  
+}
+
+
 
 
 // let checkForBomb = () => clickedSquare.value === -1 ? console.log('boom') : console.log('reee');
@@ -144,14 +189,21 @@ function checkNeighbor(evt) {
 
 
 function render() {
-  
+  displayMessage()
+  // showReplay()
+
+
+
+
 }
 
 
 
-
-
-
+function displayMessage() {
+  if (winner) {
+    messageEl.innerText = "You Win! Congrats!"
+  }
+}
 
 
 
