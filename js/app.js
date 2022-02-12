@@ -89,9 +89,9 @@ function generateMineIndex() {
 
 function setMines() {
   generateMineIndex()
-
+  let mineString 
   mineLocations.forEach(mine => {
-    mine < 10 ? gameBoard[0][mine]= -1 : mineString = mine.toString() 
+    mine < 10 ? gameBoard[0][mine]= -1 :  mineString = mine.toString() 
     gameBoard[mineString[0]][mineString[1]] = -1
    
   })
@@ -109,25 +109,25 @@ console.log(gameBoard);
 
 function handleClick(evt) {
   let clickedSquare = evt.target
-  clickedSquare.value === -1 ? gameOver() : checkNeighbor();
-
-
-
+  checkForMine(evt)
+  // clickedSquare.value === -1 ? gameOver() : checkNeighbor();
 
   console.log(clickedSquare.value);
   
-
-  
-  
 }
+
+function checkForMine(evt) {
+  console.log(evt.target.value)
+}
+
 
 function gameOver() {
   console.log('you lose');
 }
 
 
-function checkNeighbor() {
-  
+function checkNeighbor(evt) {
+  console.log(clickedSquare.value)
 }
 
 
