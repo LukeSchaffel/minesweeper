@@ -67,7 +67,6 @@ gameBoard.forEach(function (row, idx) {
     newSquare.id = `${idx}${i}`
     newSquare.value = square
     boardEl.appendChild(newSquare)
-    
   })
 
 })
@@ -132,19 +131,84 @@ function gameOver() {
   console.log('you lose');
 }
 
+let neighbors = []
 
 function checkNeighbor(evt) {
-  let neighbors = []
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
-  neighbors.push(y-1, x-1) //North West Neighbor
-  neighbors.push(y-1, x) //North Neighbor
-  neighbors.push(y-1, x+1) //North East Neighbor
-  neighbors.push(y, x-1) //West Neighbor
-  neighbors.push(y, x+1) //East Neighbor
-  neighbors.push(y+1, x-1) //South West Neighbor
-  neighbors.push(y+1, x) //South Neighbor
-  neighbors.push(y+1, x+1) //South East Neighbor
+  
+  
+  //northWest 0,1
+  if (y > 0 && x > 0) {
+    neighbors.push(y-1,x-1)
+  } else {neighbors.push(null, null)}
+  
+  //north 2, 3
+  if (y > 0) {
+    neighbors.push(y-1, x)
+  } else {neighbors.push(null, null)}
+
+  //northEast
+  if (y > 0 && x < 9) {
+    neighbors.push(y-1, x+1)
+  } else {neighbors.push(null, null)}
+  
+  //west
+  if (x > 0) {
+    neighbors.push(y, x-1)
+  } else {neighbors.push(null, null)}
+
+  //east
+  if (x < 9) {
+    neighbors.push(y, x+1)
+  } else {neighbors.push(null, null)}
+
+  //southWest
+  if (y < 7 && x > 0) {
+    neighbors.push(y+1, x-1)
+  } else {neighbors.push(null, null)}
+  
+
+  //south
+  if (y < 7) {
+    neighbors.push(y+1, x)
+  } else {neighbors.push(null, null)}
+  
+  //southEast
+  if (y < 7 && x < 7) {
+    neighbors.push(y+1, x+1)
+  } else {neighbors.push(null, null)}
+
+
+
+
+
+  // let neighborNW = gameBoard[y-1][x-1] 
+  // let neighborN = gameBoard[y-1][x]
+  // let neighborNE = gameBoard[y-1][x+1]
+  // let neighborW = gameBoard[y][x-1]
+  // let neighborE = gameBoard[y][x+1]
+  // let neighborSW = gameBoard[y+1][x-1]
+  // let neighborS = gameBoard[y+1][x]
+  // let neighborSE = gameBoard[y+1][x+1]
+  
+
+  
+  
+  // console.log(neighborNW);
+
+
+
+  // neighbors.push(neighborNW, neighborN, neighborNE, neighborW, neighborE, neighborSW, neighborS, neighborSE)
+
+  // neighbors.push(y-1, x-1) //North West Neighbor
+  // neighbors.push(y-1, x) //North Neighbor
+  // neighbors.push(y-1, x+1) //North East Neighbor
+  // neighbors.push(y, x-1) //West Neighbor
+  // neighbors.push(y, x+1) //East Neighbor
+  // neighbors.push(y+1, x-1) //South West Neighbor
+  // neighbors.push(y+1, x) //South Neighbor
+  // neighbors.push(y+1, x+1) //South East Neighbor
   console.log(neighbors);
   
 
@@ -158,6 +222,8 @@ function checkNeighbor(evt) {
   // checkNW(evt)
 }
 
+
+
 function checkN(evt) {
   
   let x = evt.target.id[1]
@@ -167,7 +233,9 @@ function checkN(evt) {
     return
   } else {
     let newY = y - 1
+    let nCoOrd = gameBoard[newY][x]
     console.log(gameBoard[newY][x]);
+    neighbors.push(nCoOrd)
   }
   
   
