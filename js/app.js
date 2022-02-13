@@ -131,57 +131,54 @@ function gameOver() {
   console.log('you lose');
 }
 
+
 let neighbors = []
 
 function checkNeighbor(evt) {
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
+  neighbors =[]
+
+  // //northWest 0,1
+  // if (y > 0 && x > 0) {
+  //   neighbors.push(y-1,x-1)
+  // } else {neighbors.push(null, null)}
   
-  
-  //northWest 0,1
-  if (y > 0 && x > 0) {
-    neighbors.push(y-1,x-1)
-  } else {neighbors.push(null, null)}
-  
-  //north 2, 3
-  if (y > 0) {
-    neighbors.push(y-1, x)
-  } else {neighbors.push(null, null)}
+  // //north 2, 3
+  // if (y > 0) {
+  //   neighbors.push(y-1, x)
+  // } else {neighbors.push(null, null)}
 
-  //northEast
-  if (y > 0 && x < 9) {
-    neighbors.push(y-1, x+1)
-  } else {neighbors.push(null, null)}
+  // //northEast
+  // if (y > 0 && x < 9) {
+  //   neighbors.push(y-1, x+1)
+  // } else {neighbors.push(null, null)}
   
-  //west
-  if (x > 0) {
-    neighbors.push(y, x-1)
-  } else {neighbors.push(null, null)}
+  // //west
+  // if (x > 0) {
+  //   neighbors.push(y, x-1)
+  // } else {neighbors.push(null, null)}
 
-  //east
-  if (x < 9) {
-    neighbors.push(y, x+1)
-  } else {neighbors.push(null, null)}
+  // //east
+  // if (x < 9) {
+  //   neighbors.push(y, x+1)
+  // } else {neighbors.push(null, null)}
 
-  //southWest
-  if (y < 7 && x > 0) {
-    neighbors.push(y+1, x-1)
-  } else {neighbors.push(null, null)}
+  // //southWest
+  // if (y < 7 && x > 0) {
+  //   neighbors.push(y+1, x-1)
+  // } else {neighbors.push(null, null)}
   
 
-  //south
-  if (y < 7) {
-    neighbors.push(y+1, x)
-  } else {neighbors.push(null, null)}
+  // //south
+  // if (y < 7) {
+  //   neighbors.push(y+1, x)
+  // } else {neighbors.push(null, null)}
   
-  //southEast
-  if (y < 7 && x < 7) {
-    neighbors.push(y+1, x+1)
-  } else {neighbors.push(null, null)}
-
-
-
-
+  // //southEast
+  // if (y < 7 && x < 7) {
+  //   neighbors.push(y+1, x+1)
+  // } else {neighbors.push(null, null)}
 
   // let neighborNW = gameBoard[y-1][x-1] 
   // let neighborN = gameBoard[y-1][x]
@@ -197,21 +194,9 @@ function checkNeighbor(evt) {
   
   // console.log(neighborNW);
 
-
-
-  // neighbors.push(neighborNW, neighborN, neighborNE, neighborW, neighborE, neighborSW, neighborS, neighborSE)
-
-  // neighbors.push(y-1, x-1) //North West Neighbor
-  // neighbors.push(y-1, x) //North Neighbor
-  // neighbors.push(y-1, x+1) //North East Neighbor
-  // neighbors.push(y, x-1) //West Neighbor
-  // neighbors.push(y, x+1) //East Neighbor
-  // neighbors.push(y+1, x-1) //South West Neighbor
-  // neighbors.push(y+1, x) //South Neighbor
-  // neighbors.push(y+1, x+1) //South East Neighbor
-  console.log(neighbors);
   
-
+  // console.log(checkNW(evt));
+  neighbors.push(checkNW(evt), checkN(evt),checkNE(evt),checkW(evt),checkE(evt), checkSE(evt), checkS(evt), checkSW(evt))
   // checkN(evt)
   // checkNE(evt)
   // checkE(evt)
@@ -219,27 +204,161 @@ function checkNeighbor(evt) {
   // checkS(evt)
   // checkSW(evt)
   // checkW(evt)
-  // checkNW(evt)
+  console.log(neighbors);
 }
 
+
+function checkNW(evt) {
+  //northWest 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y > 0 && x > 0) {
+    return {
+      name: 'northWest',
+      value: gameBoard[y-1][x-1],
+      yLocation: y-1,
+      xLocation: x-1
+    }
+  } else {return {
+    name: 'northWest',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
 
 
 function checkN(evt) {
-  
-  let x = evt.target.id[1]
-  let y = evt.target.id[0]
-  let clickedCordinates = gameBoard[y][x]
-  if (y===0){
-    return
-  } else {
-    let newY = y - 1
-    let nCoOrd = gameBoard[newY][x]
-    console.log(gameBoard[newY][x]);
-    neighbors.push(nCoOrd)
-  }
-  
-  
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y > 0) {
+    return {
+      name: 'north',
+      value: gameBoard[y-1][x],
+      yLocation: y-1,
+      xLocation: x
+    }
+  } else {return {
+    name: 'north',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
 }
+function checkNE(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y > 0 && x<9) {
+    return {
+      name: 'northEast',
+      value: gameBoard[y-1][x+1],
+      yLocation: y-1,
+      xLocation: x+1
+    }
+  } else {return {
+    name: 'northEast',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+function checkW(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (x>0) {
+    return {
+      name: 'west',
+      value: gameBoard[y][x-1],
+      yLocation: y,
+      xLocation: x-1
+    }
+  } else {return {
+    name: 'west',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+function checkE(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (x<9) {
+    return {
+      name: 'east',
+      value: gameBoard[y][x+1],
+      yLocation: y,
+      xLocation: x+1
+    }
+  } else {return {
+    name: 'east',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+function checkSW(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y < 7 && x > 0) {
+    return {
+      name: 'southWest',
+      value: gameBoard[y+1][x-1],
+      yLocation: y+1,
+      xLocation: x-1
+    }
+  } else {return {
+    name: 'southWest',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+function checkS(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y < 7) {
+    return {
+      name: 'south',
+      value: gameBoard[y+1][x],
+      yLocation: y+1,
+      xLocation: x
+    }
+  } else {return {
+    name: 'south',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+function checkSE(evt) {
+  //north 0,1
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  if (y < 7 && x < 7) {
+    return {
+      name: 'southEast',
+      value: gameBoard[y+1][x+1],
+      yLocation: y+1,
+      xLocation: x+1
+    }
+  } else {return {
+    name: 'southEast',
+    value: null,
+    yLocation: null,
+    xLocation: null
+  }}
+}
+
+
+
+
+
 
 
 
