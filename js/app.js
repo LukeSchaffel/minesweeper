@@ -110,13 +110,36 @@ console.log(gameBoard);
 
 
 function handleClick(evt) {
-  let clickedSquare = evt.target
   checkForMine(evt)
   // clickedSquare.value === -1 ? gameOver() : checkNeighbor();
-  checkNeighbor(evt)
-  // console.log(clickedSquare.value);
-  
+  let x = parseInt(evt.target.id[1])
+  let y = parseInt(evt.target.id[0])
+  let neighborArr = createNeighborArr(x, y)
+
+  neighborArr.forEach(function (n) {
+    // let objArr = Object.entries(n)
+    // console.log(objArr);
+    y = n.yLocation
+    x = n.xLocation
+    // console.log(createNeighborArr(y, x)); 
+    if (Object.values(n).includes(null)) {
+      console.log('has null');
+    }
+    
+    
+
+  })
 }
+  
+
+
+
+
+
+
+
+
+
 
 function checkForMine(evt) {
   if (evt.target.value === -1) {
@@ -132,86 +155,17 @@ function gameOver() {
 }
 
 
-let neighbors = []
 
-function checkNeighbor(evt) {
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
-  neighbors =[]
 
-  // //northWest 0,1
-  // if (y > 0 && x > 0) {
-  //   neighbors.push(y-1,x-1)
-  // } else {neighbors.push(null, null)}
+function createNeighborArr(x, y) {
   
-  // //north 2, 3
-  // if (y > 0) {
-  //   neighbors.push(y-1, x)
-  // } else {neighbors.push(null, null)}
-
-  // //northEast
-  // if (y > 0 && x < 9) {
-  //   neighbors.push(y-1, x+1)
-  // } else {neighbors.push(null, null)}
-  
-  // //west
-  // if (x > 0) {
-  //   neighbors.push(y, x-1)
-  // } else {neighbors.push(null, null)}
-
-  // //east
-  // if (x < 9) {
-  //   neighbors.push(y, x+1)
-  // } else {neighbors.push(null, null)}
-
-  // //southWest
-  // if (y < 7 && x > 0) {
-  //   neighbors.push(y+1, x-1)
-  // } else {neighbors.push(null, null)}
-  
-
-  // //south
-  // if (y < 7) {
-  //   neighbors.push(y+1, x)
-  // } else {neighbors.push(null, null)}
-  
-  // //southEast
-  // if (y < 7 && x < 7) {
-  //   neighbors.push(y+1, x+1)
-  // } else {neighbors.push(null, null)}
-
-  // let neighborNW = gameBoard[y-1][x-1] 
-  // let neighborN = gameBoard[y-1][x]
-  // let neighborNE = gameBoard[y-1][x+1]
-  // let neighborW = gameBoard[y][x-1]
-  // let neighborE = gameBoard[y][x+1]
-  // let neighborSW = gameBoard[y+1][x-1]
-  // let neighborS = gameBoard[y+1][x]
-  // let neighborSE = gameBoard[y+1][x+1]
-  
-
-  
-  
-  // console.log(neighborNW);
-
-  
-  // console.log(checkNW(evt));
-  neighbors.push(checkNW(evt), checkN(evt),checkNE(evt),checkW(evt),checkE(evt), checkSE(evt), checkS(evt), checkSW(evt))
-  // checkN(evt)
-  // checkNE(evt)
-  // checkE(evt)
-  // checkSE(evt)
-  // checkS(evt)
-  // checkSW(evt)
-  // checkW(evt)
-  console.log(neighbors);
+  return [checkNW(x, y), checkN(x, y),checkNE(x, y),checkW(x, y),checkE(x, y), checkSW(x, y), checkS(x, y), checkSE(x, y)]
 }
 
 
-function checkNW(evt) {
-  //northWest 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+
+
+function checkNW(x, y) {
   if (y > 0 && x > 0) {
     return {
       name: 'northWest',
@@ -226,12 +180,8 @@ function checkNW(evt) {
     xLocation: null
   }}
 }
-
-
-function checkN(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkN(x, y) {
+ 
   if (y > 0) {
     return {
       name: 'north',
@@ -246,10 +196,8 @@ function checkN(evt) {
     xLocation: null
   }}
 }
-function checkNE(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkNE(x, y) {
+ 
   if (y > 0 && x<9) {
     return {
       name: 'northEast',
@@ -264,10 +212,8 @@ function checkNE(evt) {
     xLocation: null
   }}
 }
-function checkW(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkW(x, y) {
+  
   if (x>0) {
     return {
       name: 'west',
@@ -282,10 +228,8 @@ function checkW(evt) {
     xLocation: null
   }}
 }
-function checkE(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkE(x, y) {
+  
   if (x<9) {
     return {
       name: 'east',
@@ -300,10 +244,8 @@ function checkE(evt) {
     xLocation: null
   }}
 }
-function checkSW(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkSW(x, y) {
+  
   if (y < 7 && x > 0) {
     return {
       name: 'southWest',
@@ -318,10 +260,8 @@ function checkSW(evt) {
     xLocation: null
   }}
 }
-function checkS(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkS(x, y) {
+
   if (y < 7) {
     return {
       name: 'south',
@@ -336,10 +276,8 @@ function checkS(evt) {
     xLocation: null
   }}
 }
-function checkSE(evt) {
-  //north 0,1
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+function checkSE(x, y) {
+
   if (y < 7 && x < 7) {
     return {
       name: 'southEast',
