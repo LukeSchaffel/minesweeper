@@ -122,9 +122,35 @@ function handleClick(evt) {
     y = n.yLocation
     x = n.xLocation
     // console.log(createNeighborArr(y, x)); 
-    if (Object.values(n).includes(null)) {
-      console.log('has null');
+    // let neighborsNeighbors =  createNeighborArr(x, y)
+    let numOfNeighborBombs= []
+
+    if (x>=0 && x<=9 && y>=0 && y<=9 ){
+      
+      if (Object.values(n).includes(-1)) {
+        console.log('the square clicked has bomb neighbor');
+        // console.log(n);
+        // numOfNeighborBombs.push(n)
+        // } else {
+          //   console.log('the square clicked has No Neighboring Bombs');
+          //   let neighborsNeighbors = createNeighborArr(x, y)
+          //   neighborsNeighbors.forEach(function(n, idx){
+            //     if (Object.values(n).includes(-1)) {
+              //       console.log(idx, 'has bomb neighbor');
+              //     }
+              //   })    
+            }
+        
+      if (n.value === 0) {
+        console.log(n);
+      }      
     }
+
+    // console.log(neighborsNeighbors);
+
+    // if (Object.values(n).includes(null)) {
+    //   console.log('has null');
+    // }
     
     
 
