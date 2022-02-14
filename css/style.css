@@ -92,3 +92,15 @@ h2 {
   vertical-align: center;
   font-size: 3rem;
 }
+
+.covered {
+  background-color: black;
+}
+
+.safe {
+  background-color: wheat;
+}
+
+.game-over {
+  background-color: red;
+}

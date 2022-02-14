@@ -21,6 +21,7 @@ let gameBoard = [
 
 let mineLocations = []
 let winner
+let secondArray = []
 
 
 
@@ -33,6 +34,8 @@ let boardEl = document.querySelector('.container')
 let allSquares = document.querySelectorAll('.square')
 // let allSquaresArr = Array.from(allSquares)
 let messageEl = document.getElementById('message')
+let coveredSquares = document.querySelectorAll('.covered')
+let safeSquaresEl = document.querySelectorAll('.safe')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -45,9 +48,10 @@ boardEl.addEventListener('click', handleClick)
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
+  
   setMines()
+  setNumbers()
   renderGameBoard()
-  winner = null
 
   render()
   
@@ -87,7 +91,7 @@ function generateMineIndex() {
   
 }
 
-// console.log(mineLocations);
+
 
 function setMines() {
   generateMineIndex()
@@ -110,52 +114,29 @@ console.log(gameBoard);
 
 
 function handleClick(evt) {
-  checkForMine(evt)
+  // checkForMine(evt)
   // clickedSquare.value === -1 ? gameOver() : checkNeighbor();
+  let cell = evt.target
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
   let neighborArr = createNeighborArr(x, y)
+  // console.log(neighborArr);
+  
 
-  neighborArr.forEach(function (n) {
-    // let objArr = Object.entries(n)
-    // console.log(objArr);
-    y = n.yLocation
-    x = n.xLocation
-    // console.log(createNeighborArr(y, x)); 
-    // let neighborsNeighbors =  createNeighborArr(x, y)
-    let numOfNeighborBombs= []
 
-    if (x>=0 && x<=9 && y>=0 && y<=9 ){
-      
-      if (Object.values(n).includes(-1)) {
-        console.log('the square clicked has bomb neighbor');
-        // console.log(n);
-        // numOfNeighborBombs.push(n)
-        // } else {
-          //   console.log('the square clicked has No Neighboring Bombs');
-          //   let neighborsNeighbors = createNeighborArr(x, y)
-          //   neighborsNeighbors.forEach(function(n, idx){
-            //     if (Object.values(n).includes(-1)) {
-              //       console.log(idx, 'has bomb neighbor');
-              //     }
-              //   })    
-            }
-        
-      if (n.value === 0) {
-        console.log(n);
-      }      
-    }
 
-    // console.log(neighborsNeighbors);
+  determine(x, y, neighborArr)
+  determine(x, y, secondArray)
 
-    // if (Object.values(n).includes(null)) {
-    //   console.log('has null');
-    // }
-    
-    
+  }
+  
 
-  })
-}
+
+
+
+ 
+  // render()
+
   
 
 
@@ -171,7 +152,6 @@ function checkForMine(evt) {
   if (evt.target.value === -1) {
     console.log('boom');
     winner = false
-    return
   }
 }
 
@@ -197,13 +177,15 @@ function checkNW(x, y) {
       name: 'northWest',
       value: gameBoard[y-1][x-1],
       yLocation: y-1,
-      xLocation: x-1
+      xLocation: x-1,
+      status: null
     }
   } else {return {
     name: 'northWest',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkN(x, y) {
@@ -213,13 +195,15 @@ function checkN(x, y) {
       name: 'north',
       value: gameBoard[y-1][x],
       yLocation: y-1,
-      xLocation: x
+      xLocation: x,
+      status: null
     }
   } else {return {
     name: 'north',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkNE(x, y) {
@@ -229,13 +213,15 @@ function checkNE(x, y) {
       name: 'northEast',
       value: gameBoard[y-1][x+1],
       yLocation: y-1,
-      xLocation: x+1
+      xLocation: x+1,
+      status: null
     }
   } else {return {
     name: 'northEast',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkW(x, y) {
@@ -245,13 +231,15 @@ function checkW(x, y) {
       name: 'west',
       value: gameBoard[y][x-1],
       yLocation: y,
-      xLocation: x-1
+      xLocation: x-1,
+      status: null
     }
   } else {return {
     name: 'west',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkE(x, y) {
@@ -261,13 +249,15 @@ function checkE(x, y) {
       name: 'east',
       value: gameBoard[y][x+1],
       yLocation: y,
-      xLocation: x+1
+      xLocation: x+1,
+      status: null
     }
   } else {return {
     name: 'east',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkSW(x, y) {
@@ -277,13 +267,15 @@ function checkSW(x, y) {
       name: 'southWest',
       value: gameBoard[y+1][x-1],
       yLocation: y+1,
-      xLocation: x-1
+      xLocation: x-1,
+      status: null
     }
   } else {return {
     name: 'southWest',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkS(x, y) {
@@ -293,13 +285,15 @@ function checkS(x, y) {
       name: 'south',
       value: gameBoard[y+1][x],
       yLocation: y+1,
-      xLocation: x
+      xLocation: x,
+      status: null
     }
   } else {return {
     name: 'south',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 function checkSE(x, y) {
@@ -309,19 +303,55 @@ function checkSE(x, y) {
       name: 'southEast',
       value: gameBoard[y+1][x+1],
       yLocation: y+1,
-      xLocation: x+1
+      xLocation: x+1,
+      status: null
     }
   } else {return {
     name: 'southEast',
     value: null,
     yLocation: null,
-    xLocation: null
+    xLocation: null,
+    status: null
   }}
 }
 
 
+function determine(x, y, neighborArr) {
+  neighborArr.forEach(function (n) {
+    // let objArr = Object.entries(n)
+    // console.log(objArr);
+    y = n.yLocation
+    x = n.xLocation
+    // console.log(createNeighborArr(y, x)); 
+    // let neighborsNeighbors =  createNeighborArr(x, y)
+    let nm = 0
+    
+    if (x>=0 && x<=9 && y>=0 && y<=9 ){
+      if (n.value === -1) {
+        n.status = 'covered'
+        // console.log(n)
+        let coveredSquare = document.getElementById(`${y}${x}`)  
+        coveredSquare.classList.add("covered")
+       
+        return
+        }
+      if (n.value === 0) {
+        n.status = 'revealed'
+        let safeSquare = document.getElementById(`${y}${x}`)
+        safeSquare.classList.add("safe")
+        // let neighbors = createNeighborArr(x,y)
+        secondArray = createNeighborArr(x,y)
+        return
+      }  
+    }
+  })
+}
 
-
+function countDangerLevel(x, y, neighbors) {
+  neighbors.forEach(function (neighbor) {
+    
+  })
+}
 
 
 
@@ -337,10 +367,38 @@ function checkSE(x, y) {
 
 
 
+function setNumbers() {
+  gameBoard.forEach(function (row, y) {
+    row.forEach(function (cell, x) {
+      if (cell !== -1){
+        let cellNeighbors = createNeighborArr(x, y)
+        
+        let displayNum = 0
+        cellNeighbors.forEach(function (neighbors) {
+          console.log(neighbors);
+          if (neighbors.value === -1) {
+            displayNum ++
+          }
+          
+        })
+        gameBoard[y][x] = displayNum
+
+      } 
+    })
+
+  })
+  
+}
+
+
+
 
 
 function render() {
   displayMessage()
+  if (winner === false) {
+    document.querySelectorAll(".square").style.backgroundColor = "red"
+  }
   // showReplay()
 
 
@@ -353,6 +411,9 @@ function render() {
 function displayMessage() {
   if (winner) {
     messageEl.innerText = "You Win! Congrats!"
+  }
+  if (winner === false) {
+    messageEl.innerText = "youre tash kid"
   }
 }
 
