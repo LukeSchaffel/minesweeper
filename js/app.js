@@ -141,7 +141,7 @@ function handleClick(evt) {
     revealed[y][x] = 1
     
   } else if (cell.value === 0) {
-    cascade(cell.id[1], cell.id[0])
+    cascade(x, y)
   }
   render()
 
@@ -278,7 +278,7 @@ function checkE(x, y) {
   }}
 }
 function checkSW(x, y) {
-  console.log(x, y);
+  
   if (y < 7 && x > 0) {
     return {
       name: 'southWest',
@@ -409,16 +409,19 @@ function setNumbers() {
 
 
 function cascade(x, y) {
-  console.log(y, 'y', x, 'x');
+
   
-  if (gameBoard[y][x] === 0){
-    revealed[y][x] === 1
+  if (gameBoard[y][x] === 0 && revealed[y][x] === 0 ){
+    revealed[y][x] = 1
     let cellNeighbors = createNeighborArr(x, y)
-    console.log(cellNeighbors);
-    cellNeighbors.forEach(function (cell, x, y) {
-      console.log(cell);
-      console.log(x);
+    
+    cellNeighbors.forEach(function (cell) {
+      
       if (cell.value === 0) {
+        console.log(cell);
+        cascade(cell.xLocation, cell.yLocation)
+      } else if (cell.value > 0){
+        revealed[cell.yLocation][cell.xLocation] = 1
       }
     })
   }
