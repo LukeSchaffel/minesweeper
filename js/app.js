@@ -19,6 +19,19 @@ let gameBoard = [
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+let revealed = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+
+
+
 let mineLocations = []
 let winner
 let secondArray = []
@@ -31,7 +44,7 @@ let secondArray = []
 
 
 let boardEl = document.querySelector('.container')
-let allSquares = document.querySelectorAll('.square')
+let allSquares 
 // let allSquaresArr = Array.from(allSquares)
 let messageEl = document.getElementById('message')
 let coveredSquares = document.querySelectorAll('.covered')
@@ -74,6 +87,7 @@ gameBoard.forEach(function (row, idx) {
   })
 
 })
+allSquares = document.querySelectorAll('.square')
 }
 
 
@@ -115,18 +129,21 @@ console.log(gameBoard);
 
 function handleClick(evt) {
   // checkForMine(evt)
-  // clickedSquare.value === -1 ? gameOver() : checkNeighbor();
+  
   let cell = evt.target
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
-  let neighborArr = createNeighborArr(x, y)
-  // console.log(neighborArr);
-  
 
 
-
-  determine(x, y, neighborArr)
-  determine(x, y, secondArray)
+  if (cell.value === -1) {
+    gameOver()
+  } else if (cell.value > 0){
+    revealed[y][x] = 1
+    
+  } else if (cell.value === 0) {
+    cascade(cell.id[1], cell.id[0])
+  }
+  render()
 
   }
   
@@ -261,7 +278,7 @@ function checkE(x, y) {
   }}
 }
 function checkSW(x, y) {
-  
+  console.log(x, y);
   if (y < 7 && x > 0) {
     return {
       name: 'southWest',
@@ -375,7 +392,7 @@ function setNumbers() {
         
         let displayNum = 0
         cellNeighbors.forEach(function (neighbors) {
-          console.log(neighbors);
+          
           if (neighbors.value === -1) {
             displayNum ++
           }
@@ -391,6 +408,23 @@ function setNumbers() {
 }
 
 
+function cascade(x, y) {
+  console.log(y, 'y', x, 'x');
+  
+  if (gameBoard[y][x] === 0){
+    revealed[y][x] === 1
+    let cellNeighbors = createNeighborArr(x, y)
+    console.log(cellNeighbors);
+    cellNeighbors.forEach(function (cell, x, y) {
+      console.log(cell);
+      console.log(x);
+      if (cell.value === 0) {
+      }
+    })
+  }
+}
+
+
 
 
 
@@ -399,6 +433,16 @@ function render() {
   if (winner === false) {
     document.querySelectorAll(".square").style.backgroundColor = "red"
   }
+  revealed.forEach(function (row, y) {
+    row.forEach(function (square, x) {
+      if (square === 1) {
+        allSquares[parseInt(`${y}${x}`)].innerText = gameBoard[y][x]
+        allSquares[parseInt(`${y}${x}`)].classList.add('safe')
+        
+      }
+    })
+  })
+
   // showReplay()
 
 
