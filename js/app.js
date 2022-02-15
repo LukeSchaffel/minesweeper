@@ -93,13 +93,22 @@ allSquares = document.querySelectorAll('.square')
 
 function generateMineIndex() {
   let numMines = 10
-  let x
-  if (!mineLocations.includes(x)) {
-    for (let i = 0; i < numMines; i++) {
+  
+  while (mineLocations.length < numMines) {
     let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
-    mineLocations.push(x)
+    if (!mineLocations.includes(x)) {
+      
+      mineLocations.push(x)
     }
-  } 
+  }
+  
+
+  // if (!mineLocations.includes(x) && mineLocations.length < numMines + 1) {
+  //   for (let i = 0; i < numMines; i++) {
+  //   let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
+  //   mineLocations.push(x)
+  //   }
+  // } 
   
   
   
@@ -110,10 +119,15 @@ function generateMineIndex() {
 function setMines() {
   generateMineIndex()
   let mineString 
-  mineLocations.forEach(mine => {
-    mine < 10 ? gameBoard[0][mine]= -1 :  mineString = mine.toString() 
-    gameBoard[mineString[0]][mineString[1]] = -1
-   
+  mineLocations.forEach(function (mine) {
+    if (mine < 10) {
+      gameBoard[0][mine]= -1
+    } else { 
+      mineString = mine.toString() 
+      gameBoard[mineString[0]][mineString[1]] = -1
+
+    }
+    console.log(mine);
   })
 
 }
