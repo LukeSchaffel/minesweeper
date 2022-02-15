@@ -150,21 +150,6 @@ function handleClick(evt) {
 
 
 
-
- 
-  // render()
-
-  
-
-
-
-
-
-
-
-
-
-
 function checkForMine(evt) {
   if (evt.target.value === -1) {
     console.log('boom');
@@ -175,6 +160,7 @@ function checkForMine(evt) {
 
 function gameOver() {
   console.log('you lose');
+  winner = false
 }
 
 
@@ -374,37 +360,21 @@ function countDangerLevel(x, y, neighbors) {
 
 
 
-// let checkForBomb = () => clickedSquare.value === -1 ? console.log('boom') : console.log('reee');
-
-
-// function checkNeighbors(evt) {
-  
-//   console.log(clickedSquare);
-// }
-
-
-
 function setNumbers() {
   gameBoard.forEach(function (row, y) {
     row.forEach(function (cell, x) {
       if (cell !== -1){
         let cellNeighbors = createNeighborArr(x, y)
-        
         let displayNum = 0
         cellNeighbors.forEach(function (neighbors) {
-          
           if (neighbors.value === -1) {
             displayNum ++
           }
-          
         })
         gameBoard[y][x] = displayNum
-
       } 
     })
-
   })
-  
 }
 
 
@@ -418,7 +388,7 @@ function cascade(x, y) {
     cellNeighbors.forEach(function (cell) {
       
       if (cell.value === 0) {
-        console.log(cell);
+        
         cascade(cell.xLocation, cell.yLocation)
       } else if (cell.value > 0){
         revealed[cell.yLocation][cell.xLocation] = 1
@@ -433,22 +403,19 @@ function cascade(x, y) {
 
 function render() {
   displayMessage()
-  if (winner === false) {
-    document.querySelectorAll(".square").style.backgroundColor = "red"
-  }
+ 
   revealed.forEach(function (row, y) {
     row.forEach(function (square, x) {
       if (square === 1) {
-        allSquares[parseInt(`${y}${x}`)].innerText = gameBoard[y][x]
+        if (gameBoard[y][x] > 0) {
+          allSquares[parseInt(`${y}${x}`)].innerText = gameBoard[y][x]
+          
+        }
         allSquares[parseInt(`${y}${x}`)].classList.add('safe')
         
       }
     })
   })
-
-  // showReplay()
-
-
 
 
 }
@@ -473,29 +440,3 @@ function displayMessage() {
 
 
 
-
-
-// function mapBoardValue() {
-//   gameBoard.forEach(function (row, i1) {
-//     row.forEach(function (square, i2) {
-//       // allSquares[i1][i2].value = square[i1][i2]
-//       allSquares[i1, i2].value = square
-//       console.log(allSquares[i1, i2].value);
-//     })
-//   })
-  
-  
-// }
-
-
-// function mapBoardValue() {
-//   allSquaresArr.forEach(function (row, i1) {
-//     row.forEach(function (square, i2) {
-//       console.log(square);
-//       // allSquares[i1][i2].value = square[i1][i2]
-//       allSquaresArr[i1, i2] = square
-//       console.log(allSquaresArr[i1, i2]);
-//     })
-//   })
-  
-// }
