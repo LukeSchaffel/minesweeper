@@ -49,11 +49,12 @@ let allSquares
 let messageEl = document.getElementById('message')
 let coveredSquares = document.querySelectorAll('.covered')
 let safeSquaresEl = document.querySelectorAll('.safe')
+let replayButton = document.getElementById('play-again')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 boardEl.addEventListener('click', handleClick)
-
+replayButton.addEventListener('click', restart)
 
 
 
@@ -61,11 +62,9 @@ boardEl.addEventListener('click', handleClick)
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-  
   setMines()
   setNumbers()
   renderGameBoard()
-
   render()
   
 }
@@ -151,15 +150,6 @@ function handleClick(evt) {
   
 
 
-
-function checkForMine(evt) {
-  if (evt.target.value === -1) {
-    console.log('boom');
-    winner = false
-  }
-}
-
-
 function gameOver() {
   gameBoard.forEach((row, i)=>{
     row.forEach((square, j)=>{
@@ -169,6 +159,8 @@ function gameOver() {
     })
   })
   
+  boardEl.removeEventListener('click', handleClick)
+  replayButton.removeAttribute('hidden')
 }
 
 
@@ -383,6 +375,7 @@ function setNumbers() {
       } 
     })
   })
+  
 }
 
 
@@ -428,6 +421,10 @@ function render() {
 
 }
 
+function restart() {
+  boardEl
+  init()
+}
 
 
 function displayMessage() {
