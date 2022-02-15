@@ -60,6 +60,7 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ] 
+  messageEl.innerText = '' 
   replayButton.setAttribute('hidden', true)   
   mineLocations = []  
   setMines()
@@ -158,7 +159,7 @@ function gameOver() {
       }
     })
   })
-  
+  messageEl.innerText = "You Lose =("
   boardEl.removeEventListener('click', handleClick)
   replayButton.removeAttribute('hidden')
 }
@@ -319,45 +320,33 @@ function checkSE(x, y) {
 }
 
 
-function determine(x, y, neighborArr) {
-  neighborArr.forEach(function (n) {
-    // let objArr = Object.entries(n)
-    // console.log(objArr);
-    y = n.yLocation
-    x = n.xLocation
-    // console.log(createNeighborArr(y, x)); 
-    // let neighborsNeighbors =  createNeighborArr(x, y)
-    let nm = 0
+// function determine(x, y, neighborArr) {
+//   neighborArr.forEach(function (n) {
+//     y = n.yLocation
+//     x = n.xLocation
     
-    if (x>=0 && x<=9 && y>=0 && y<=9 ){
-      if (n.value === -1) {
-        n.status = 'covered'
-        // console.log(n)
-        let coveredSquare = document.getElementById(`${y}${x}`)  
-        coveredSquare.classList.add("covered")
+//     let nm = 0
+    
+//     if (x>=0 && x<=9 && y>=0 && y<=9 ){
+//       if (n.value === -1) {
+//         n.status = 'covered'
+        
+//         let coveredSquare = document.getElementById(`${y}${x}`)  
+//         coveredSquare.classList.add("covered")
        
-        return
-        }
-      if (n.value === 0) {
-        n.status = 'revealed'
-        let safeSquare = document.getElementById(`${y}${x}`)
-        safeSquare.classList.add("safe")
-        // let neighbors = createNeighborArr(x,y)
-        secondArray = createNeighborArr(x,y)
-        return
-      }  
-    }
-  })
-}
-
-function countDangerLevel(x, y, neighbors) {
-  neighbors.forEach(function (neighbor) {
-    
-  })
-}
-
-
-
+//         return
+//         }
+//       if (n.value === 0) {
+//         n.status = 'revealed'
+//         let safeSquare = document.getElementById(`${y}${x}`)
+//         safeSquare.classList.add("safe")
+//         // let neighbors = createNeighborArr(x,y)
+//         secondArray = createNeighborArr(x,y)
+//         return
+//       }  
+//     }
+//   })
+// }
 
 
 function setNumbers() {
@@ -431,10 +420,11 @@ function checkForWinner() {
       }
     })
   })
-  console.log(total);
 
   if (total === 70) {
-    console.log('you win');
+  messageEl.innerText = "You Win! Congrats!"  
+  boardEl.removeEventListener('click', handleClick)
+  replayButton.removeAttribute('hidden')
   }
 
 }
