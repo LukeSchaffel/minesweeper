@@ -418,8 +418,27 @@ function render() {
     })
   })
 
+  checkForWinner()
 
 }
+
+function checkForWinner() {
+  let total = 0
+  revealed.forEach(function (row, i) {
+    row.forEach(function (square, j) {
+      if (square === 1) {
+        total ++
+      }
+    })
+  })
+  console.log(total);
+
+  if (total === 70) {
+    console.log('you win');
+  }
+
+}
+
 
 function restart() {
   boardEl.innerText = ""
