@@ -101,17 +101,7 @@ function generateMineIndex() {
       mineLocations.push(x)
     }
   }
-  
 
-  // if (!mineLocations.includes(x) && mineLocations.length < numMines + 1) {
-  //   for (let i = 0; i < numMines; i++) {
-  //   let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
-  //   mineLocations.push(x)
-  //   }
-  // } 
-  
-  
-  
 }
 
 
@@ -127,7 +117,6 @@ function setMines() {
       gameBoard[mineString[0]][mineString[1]] = -1
 
     }
-    console.log(mine);
   })
 
 }
@@ -142,7 +131,6 @@ console.log(gameBoard);
 
 
 function handleClick(evt) {
-  // checkForMine(evt)
   
   let cell = evt.target
   let x = parseInt(evt.target.id[1])
@@ -173,8 +161,14 @@ function checkForMine(evt) {
 
 
 function gameOver() {
-  console.log('you lose');
-  winner = false
+  gameBoard.forEach((row, i)=>{
+    row.forEach((square, j)=>{
+      if(square === -1){
+       allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="https://cdn.pixabay.com/photo/2017/01/31/16/59/bomb-2025548_1280.png" alt="">'
+      }
+    })
+  })
+  
 }
 
 
