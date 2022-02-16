@@ -69,6 +69,13 @@ main  {
   
 }
 
+#picture-div > img {
+margin: 0 auto;
+border-radius: 50%;
+
+}
+
+
 header {
   background-color: rgba(240, 248, 255, 0.755);
   display: flex;

@@ -27,6 +27,7 @@ let messageEl = document.getElementById('message')
 let coveredSquares = document.querySelectorAll('.covered')
 let safeSquaresEl = document.querySelectorAll('.safe')
 let replayButton = document.getElementById('play-again')
+let pictureDiv = document.getElementById('picture-div')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -41,6 +42,7 @@ boardEl.addEventListener('contextmenu', placeflag)
 
 function init() {
   winner = null
+  pictureDiv.innerHTML = ''
   gameBoard = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -425,18 +427,18 @@ function restart() {
 
 
 function renderWinLoss() {
-  if (winner) {
+  if (winner === true) {
   messageEl.innerHTML = "You Win! Congrats!"  
   boardEl.removeEventListener('click', handleClick)
-  boardEl.removeListener('contextmenu', placeflag)
+  boardEl.removeEventListener('contextmenu', placeflag)
   replayButton.removeAttribute('hidden')
-  boardEl.innerHTML = '<img src="https://c.tenor.com/I0n7w-UIzycAAAAC/arangutan-monkey.gif" alt="">'
+  pictureDiv.innerHTML = '<img src="images/arangutan-monkey.gif" alt="">'
   }
   if (winner === false) {
     gameBoard.forEach((row, i)=>{
       row.forEach((square, j)=>{
         if(square === -1){
-         allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="assets/bomb.png" alt="">'
+         allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="images/favicon.png" alt="">'
         }
       })
     })
