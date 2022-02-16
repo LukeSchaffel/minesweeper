@@ -40,6 +40,7 @@ replayButton.addEventListener('click', restart)
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
+  winner = null
   gameBoard = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -118,7 +119,6 @@ function setMines() {
 
     }
   })
-
 }
 
 
@@ -138,7 +138,7 @@ function handleClick(evt) {
 
 
   if (cell.value === -1) {
-    gameOver()
+    winner = false
   } else if (cell.value > 0){
     revealed[y][x] = 1
     
@@ -151,18 +151,7 @@ function handleClick(evt) {
   
 
 
-function gameOver() {
-  gameBoard.forEach((row, i)=>{
-    row.forEach((square, j)=>{
-      if(square === -1){
-       allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="https://cdn.pixabay.com/photo/2017/01/31/16/59/bomb-2025548_1280.png" alt="">'
-      }
-    })
-  })
-  messageEl.innerText = "You Lose =("
-  boardEl.removeEventListener('click', handleClick)
-  replayButton.removeAttribute('hidden')
-}
+
 
 
 
@@ -320,34 +309,6 @@ function checkSE(x, y) {
 }
 
 
-// function determine(x, y, neighborArr) {
-//   neighborArr.forEach(function (n) {
-//     y = n.yLocation
-//     x = n.xLocation
-    
-//     let nm = 0
-    
-//     if (x>=0 && x<=9 && y>=0 && y<=9 ){
-//       if (n.value === -1) {
-//         n.status = 'covered'
-        
-//         let coveredSquare = document.getElementById(`${y}${x}`)  
-//         coveredSquare.classList.add("covered")
-       
-//         return
-//         }
-//       if (n.value === 0) {
-//         n.status = 'revealed'
-//         let safeSquare = document.getElementById(`${y}${x}`)
-//         safeSquare.classList.add("safe")
-//         // let neighbors = createNeighborArr(x,y)
-//         secondArray = createNeighborArr(x,y)
-//         return
-//       }  
-//     }
-//   })
-// }
-
 
 function setNumbers() {
   gameBoard.forEach(function (row, y) {
@@ -392,7 +353,7 @@ function cascade(x, y) {
 
 
 function render() {
-  displayMessage()
+  
  
   revealed.forEach(function (row, y) {
     row.forEach(function (square, x) {
@@ -409,6 +370,10 @@ function render() {
 
   checkForWinner()
 
+  if (winner !== null) {
+    renderWinLoss()
+  }
+
 }
 
 function checkForWinner() {
@@ -422,9 +387,8 @@ function checkForWinner() {
   })
 
   if (total === 70) {
-  messageEl.innerText = "You Win! Congrats!"  
-  boardEl.removeEventListener('click', handleClick)
-  replayButton.removeAttribute('hidden')
+  winner = true
+  
   }
 
 }
@@ -437,12 +401,24 @@ function restart() {
 }
 
 
-function displayMessage() {
+function renderWinLoss() {
   if (winner) {
-    messageEl.innerText = "You Win! Congrats!"
+  messageEl.innerHTML = "You Win! Congrats!"  
+  boardEl.removeEventListener('click', handleClick)
+  replayButton.removeAttribute('hidden')
+  boardEl.innerHTML = '<img src="https://c.tenor.com/I0n7w-UIzycAAAAC/arangutan-monkey.gif" alt="">'
   }
   if (winner === false) {
-    messageEl.innerText = "youre tash kid"
+    gameBoard.forEach((row, i)=>{
+      row.forEach((square, j)=>{
+        if(square === -1){
+         allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="https://cdn.pixabay.com/photo/2017/01/31/16/59/bomb-2025548_1280.png" alt="">'
+        }
+      })
+    })
+    messageEl.innerText = "You Lose =("
+    boardEl.removeEventListener('click', handleClick)
+    replayButton.removeAttribute('hidden')
   }
 }
 
