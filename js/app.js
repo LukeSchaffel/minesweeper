@@ -436,7 +436,7 @@ function renderWinLoss() {
     gameBoard.forEach((row, i)=>{
       row.forEach((square, j)=>{
         if(square === -1){
-         allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="https://cdn.pixabay.com/photo/2017/01/31/16/59/bomb-2025548_1280.png" alt="">'
+         allSquares[parseInt(`${i}${j}`)].innerHTML = '<img src="assets/bomb.png" alt="">'
         }
       })
     })
