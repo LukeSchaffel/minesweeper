@@ -12,7 +12,7 @@ let gameBoard = []
 let revealed = []
 let mineLocations = []
 let winner
-let secondArray = []
+
 
 
 
@@ -23,7 +23,6 @@ let secondArray = []
 
 let boardEl = document.querySelector('.container')
 let allSquares 
-// let allSquaresArr = Array.from(allSquares)
 let messageEl = document.getElementById('message')
 let coveredSquares = document.querySelectorAll('.covered')
 let safeSquaresEl = document.querySelectorAll('.safe')
@@ -33,6 +32,7 @@ let replayButton = document.getElementById('play-again')
 
 boardEl.addEventListener('click', handleClick)
 replayButton.addEventListener('click', restart)
+boardEl.addEventListener('contextmenu', placeflag)
 
 
 
@@ -61,7 +61,8 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ] 
-  messageEl.innerText = '' 
+
+  messageEl.textContent = 'Left Click to chose a square. Right Click to Place a Flag!'  
   replayButton.setAttribute('hidden', true)   
   mineLocations = []  
   setMines()
@@ -123,6 +124,16 @@ function setMines() {
 
 
 
+function placeflag(evt) {
+  evt.preventDefault()
+  if (!evt.target.classList.contains('safe')) {
+    
+    evt.target.textContent = "🚩" 
+  }
+
+  
+}
+
 
 console.log(gameBoard);
 
@@ -135,14 +146,16 @@ function handleClick(evt) {
   let cell = evt.target
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
-
+  // cell.innerText = ""
 
   if (cell.value === -1) {
     winner = false
   } else if (cell.value > 0){
+    cell.innerText = ""
     revealed[y][x] = 1
     
   } else if (cell.value === 0) {
+    cell.innerText = ""
     cascade(x, y)
   }
   render()
@@ -362,6 +375,7 @@ function render() {
           allSquares[parseInt(`${y}${x}`)].innerText = gameBoard[y][x]
           
         }
+        // allSquares[parseInt(`${y}${x}`)].classList.remove('flagged')
         allSquares[parseInt(`${y}${x}`)].classList.add('safe')
         
       }

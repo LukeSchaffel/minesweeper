@@ -46,6 +46,7 @@ main  {
 }
 
 
+
 .container {  
   
   display: grid;
@@ -54,25 +55,50 @@ main  {
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."
-    ". . . . . . . . . .";
-   width: fit-content;
-   margin: auto;
-
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . ."
+  ". . . . . . . . . .";
+  width: fit-content;
+  margin: 50px auto;
+  
 }
 
 header {
   background-color: rgba(240, 248, 255, 0.755);
   display: flex;
   flex-direction: column;
-  margin: 50px auto;
+  margin: 50px auto 0;
+  text-align: center;
+  justify-content: center;
 }
+
+#btn-div {
+  margin: 50px auto 0;
+  font-family: 'Rowdies', cursive;
+  font-size: 2rem;
+}
+
+button {
+  width: 150px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: darkolivegreen;
+  border: solid black;
+
+}
+
+button:hover {
+  background-color: rgba(67, 182, 80, 0.872)
+
+}
+
+
+
 
 h1 {
   margin: 0 auto 0;
@@ -87,6 +113,13 @@ h2 {
 
 
 
+.flagged {
+  display: flex;
+  background-image: url("https://www.clipartmax.com/png/middle/78-786779_small-flag-icon-red.png");
+  background-color: aqua;
+  background-size: cover;
+  background-color: black;
+}
 
 
 .square {
@@ -102,6 +135,21 @@ h2 {
   font-size: 3rem;
 }
 
+
+
+
+.safe {
+  background-color: wheat;
+}
+.square:hover {
+  background-color:brown
+  
+
+
+}
+
+
+
 .square > img {
   size: 100%;
   
@@ -111,9 +159,6 @@ h2 {
   background-color: black;
 }
 
-.safe {
-  background-color: wheat;
-}
 
 .game-over {
   background-color: red;
