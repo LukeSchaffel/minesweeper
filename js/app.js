@@ -136,8 +136,8 @@ function placeflag(evt) {
   
 }
 
-
-console.log(gameBoard);
+//reveal to cheat
+// console.log(gameBoard);
 
 
 
@@ -148,7 +148,7 @@ function handleClick(evt) {
   let cell = evt.target
   let x = parseInt(evt.target.id[1])
   let y = parseInt(evt.target.id[0])
-  // cell.innerText = ""
+  
 
   if (cell.value === -1) {
     winner = false
