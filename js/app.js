@@ -12,7 +12,7 @@ let gameBoard = []
 let revealed = []
 let mineLocations = []
 let winner
-
+let numMines = 10
 
 
 
@@ -62,7 +62,7 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ] 
 
-  messageEl.textContent = 'Left Click to chose a square. Right Click to Place a Flag!'  
+  messageEl.textContent = 'Left Click to Choose a Square. Right Click to Place a Flag!'  
   replayButton.setAttribute('hidden', true)   
   mineLocations = []  
   setMines()
@@ -94,7 +94,7 @@ allSquares = document.querySelectorAll('.square')
 
 
 function generateMineIndex() {
-  let numMines = 10
+  
   
   while (mineLocations.length < numMines) {
     let x = (Math.floor(Math.random() * (gameBoard.length * gameBoard[0].length)))
@@ -391,6 +391,14 @@ function render() {
 }
 
 function checkForWinner() {
+  countSquares = 0
+  gameBoard.forEach(function (row) {
+    row.forEach(function (square) {
+      countSquares ++
+    })
+  })
+  
+
   let total = 0
   revealed.forEach(function (row, i) {
     row.forEach(function (square, j) {
@@ -400,7 +408,7 @@ function checkForWinner() {
     })
   })
 
-  if (total === 70) {
+  if (countSquares - total === numMines) {
   winner = true
   
   }
@@ -412,6 +420,7 @@ function restart() {
   boardEl.innerText = ""
   init()
   boardEl.addEventListener('click', handleClick)
+  boardEl.addEventListener('contextmenu', placeflag)
 }
 
 
@@ -419,6 +428,7 @@ function renderWinLoss() {
   if (winner) {
   messageEl.innerHTML = "You Win! Congrats!"  
   boardEl.removeEventListener('click', handleClick)
+  boardEl.removeListener('contextmenu', placeflag)
   replayButton.removeAttribute('hidden')
   boardEl.innerHTML = '<img src="https://c.tenor.com/I0n7w-UIzycAAAAC/arangutan-monkey.gif" alt="">'
   }
@@ -432,6 +442,7 @@ function renderWinLoss() {
     })
     messageEl.innerText = "You Lose =("
     boardEl.removeEventListener('click', handleClick)
+    boardEl.removeEventListener('contextmenu', placeflag)
     replayButton.removeAttribute('hidden')
   }
 }
