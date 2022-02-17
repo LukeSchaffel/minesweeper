@@ -33,8 +33,15 @@ body {
  
  size: 1vh;
 text-align: center;
-background-color: rgba(5, 45, 13, 0.892);  
-  
+/* background-color: rgba(5, 45, 13, 0.892);   */
+background-image: url("/images/table.jpg");
+
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+
+
 }
 
 
@@ -95,7 +102,7 @@ button {
   width: 150px;
   height: 80px;
   border-radius: 50px;
-  background-color: darkolivegreen;
+  background-color: wheat;
   border: solid black;
 
 }
@@ -132,7 +139,8 @@ h2 {
 
 .square {
   border: solid black 1px;
-  background-color: rgba(67, 182, 80, 0.872);
+  background-color: rgba(75, 44, 44, 0.892);
+  /* background-color: rgba(67, 182, 80, 0.872); */
   display: flex;
   width: 50px;
   height: 50px;
@@ -147,7 +155,7 @@ h2 {
 
 
 .safe {
-  background-color: wheat;
+  background-color: rgba(245, 222, 179, 0.42);
 }
 .square:hover {
   background-color:brown

@@ -1,10 +1,3 @@
-/*-------------------------------- Constants --------------------------------*/
-
-
-
-
-
-
 
 /*---------------------------- Variables (state) ----------------------------*/
 //possible values 0 is covered no bomb, -1 covered bomb, 1-8 neighber bombs
