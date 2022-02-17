@@ -128,11 +128,12 @@ function setMines() {
 
 function placeflag(evt) {
   evt.preventDefault()
-  if (!evt.target.classList.contains('safe')) {
-    
+  if (!evt.target.classList.contains('safe')) { 
     evt.target.textContent = "🚩" 
-  }
 
+  }
+ 
+  
   
 }
 
@@ -377,7 +378,7 @@ function render() {
           allSquares[parseInt(`${y}${x}`)].innerText = gameBoard[y][x]
           
         }
-        // allSquares[parseInt(`${y}${x}`)].classList.remove('flagged')
+        
         allSquares[parseInt(`${y}${x}`)].classList.add('safe')
         
       }
