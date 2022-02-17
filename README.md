@@ -1,9 +1,9 @@
-# MINESWEEPER
+# 💣  MINESWEEPER 💣
 ## by: Luke Schaffel
 
 Minesweeper is a game about, strategy, decision making, and a little bit of luck. 
 
-A grid of 10 squares wide and 8 squares tall (8 wide and 10 tall on mobile devies) is presented. With the help of your place flag tool, it is your objective to clear the board of all of it's safe spaces withought triggering an explosion!
+A grid 10 squares wide and 8 squares tall (8 wide and 10 tall on mobile devies) is presented. With the help of your place flag tool, it is your objective to clear the board of all of it's safe spaces withought triggering an explosion!
 
 Upon selecting a safe square, it will either display a number of 1-8,(this number tells you how many unsafe squares are in the neighboring area,) or trigger a chain reaction that flips all of the safe squares until it reaches a number.  
 
@@ -17,7 +17,7 @@ Upon selecting a safe square, it will either display a number of 1-8,(this numbe
 ![Mobile Version](https://i.imgur.com/M4g9yio.jpg)
 
 
-Technologies Used:
+#### Technologies Used 💻:
 
 - JavaScript
 - CSS
@@ -25,10 +25,15 @@ Technologies Used:
 - Git/Github
 - Surge.sh
 
+#### Ice Box Features 🧊 :
+- remove flag feature
+- Medium and Hard Modes (larger boards and more mines)
+- music
+- click sound effects
+- explosion animations 
 
 
-
-credits:
+Image credits:
 - https://www.vectorstock.com/royalty-free-vector/wood-table-top-on-golden-bokeh-abstract-background-vector-11645138
 
 - https://pixabay.com/vectors/bomb-cartoon-iconic-2025548/
