@@ -33,7 +33,7 @@ body {
  
  size: 1vh;
 text-align: center;
-/* background-color: rgba(5, 45, 13, 0.892);   */
+
 background-image: url("/images/table.jpg");
 
 background-size: cover;
@@ -84,7 +84,7 @@ border-radius: 50%;
 
 
 header {
-  background-color: rgba(240, 248, 255, 0.755);
+  
   display: flex;
   flex-direction: column;
   margin: 50px auto 0;
@@ -121,10 +121,7 @@ h1 {
   font-family: 'Rowdies', cursive;
 }
 
-h2 {
-  
 
-}
 
 
 
@@ -139,7 +136,7 @@ h2 {
 
 .square {
   border: solid black 1px;
-  background-color: rgba(75, 44, 44, 0.892);
+  background-color: rgb(120, 83, 83);
   /* background-color: rgba(67, 182, 80, 0.872); */
   display: flex;
   width: 50px;
@@ -166,9 +163,8 @@ h2 {
 
 
 
-.square > img {
-  size: 100%;
-  
+#picture-div > img {
+  width: 300px;
 }
 
 .covered {
@@ -182,12 +178,7 @@ h2 {
 
 
 @media only screen and (max-width: 667px) {
-  body {
-    
-  }
 
-
-  
     .container {  
       transform: rotate(90deg);
       
