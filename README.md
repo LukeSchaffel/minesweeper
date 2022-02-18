@@ -36,7 +36,7 @@ Upon selecting a safe square, it will either display a number of 1-8,(this numbe
 #### Ice Box Features 🧊 :
 - remove flag feature
 - Medium and Hard Modes (larger boards and more mines)
-- music
+- Compose Music that Increases In Intesity As the Game Progresses.
 - click sound effects
 - explosion animations 
 

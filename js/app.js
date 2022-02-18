@@ -131,7 +131,7 @@ function placeflag(evt) {
 }
 
 //reveal to cheat
-console.log(gameBoard);
+// console.log(gameBoard);
 
 
 
