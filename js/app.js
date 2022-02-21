@@ -45,21 +45,10 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
  
     ]
   revealed = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -93,7 +82,7 @@ gameBoard.forEach(function (row, idx) {
   row.forEach(function (square, i) {
     let newSquare = document.createElement('div')
     newSquare.className = "square"
-    newSquare.id = `${idx}${i}`
+    newSquare.id = `${idx}-${i}`
     newSquare.value = square
     boardEl.appendChild(newSquare)
   })
@@ -157,21 +146,9 @@ function handleRightClick(evt) {
 function handleClick(evt) {
   
   let cell = evt.target
-  let x
-  let y
-  if (cell.id.length === 2) {
-    x = parseInt(evt.target.id[1])  
-    y = parseInt(evt.target.id[0])
-  } else {
-    x = parseInt(evt.target.id[2])
-    y = `${evt.target.id[0]}` + `${evt.target.id[1]}`
-  }
-  
-  console.log(y);
+  let x = parseInt(cell.id.split("-")[1])
+  let y = parseInt(cell.id.split("-")[0])
 
-
-
-  
 
   if (cell.value === -1) {
     winner = false
@@ -293,7 +270,7 @@ function checkE(x, y) {
 }
 function checkSW(x, y) {
   
-  if (y < gameBoard.length-1 && x > 0) {
+  if (y < (gameBoard.length-1) && x > 0) {
     return {
       name: 'southWest',
       value: gameBoard[y+1][x-1],
@@ -311,7 +288,7 @@ function checkSW(x, y) {
 }
 function checkS(x, y) {
 
-  if (y < gameBoard.length-1) {
+  if (y < (gameBoard.length-1)) {
     return {
       name: 'south',
       value: gameBoard[y+1][x],
@@ -329,7 +306,7 @@ function checkS(x, y) {
 }
 function checkSE(x, y) {
 
-  if (y < gameBoard.length-1 && x < gameBoard[0].length-1) {
+  if (y < (gameBoard.length-1) && x < (gameBoard[0].length-1)) {
     return {
       name: 'southEast',
       value: gameBoard[y+1][x+1],
