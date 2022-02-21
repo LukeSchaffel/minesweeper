@@ -26,7 +26,7 @@ let pictureDiv = document.getElementById('picture-div')
 
 boardEl.addEventListener('click', handleClick)
 replayButton.addEventListener('click', restart)
-boardEl.addEventListener('contextmenu', placeflag)
+boardEl.addEventListener('contextmenu', handleRightClick)
 
 
 
@@ -44,7 +44,7 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ]
   revealed = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -54,7 +54,7 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ] 
 
   messageEl.textContent = 'Left Click to Choose a Square. Right Click to Place a Flag!'  
@@ -119,21 +119,23 @@ function setMines() {
 
 
 
-function placeflag(evt) {
-  evt.preventDefault()
-  if (!evt.target.classList.contains('safe')) { 
-    evt.target.textContent = "🚩" 
 
-  }
+function handleRightClick(evt) {
+  evt.preventDefault()
+  let clicked = evt.target
+
+  if (!clicked.classList.contains('safe') && (clicked.textContent !== "🚩")){
+    clicked.textContent = "🚩"
+  } else if (!clicked.classList.contains('safe') && (clicked.textContent === "🚩")){
+    clicked.textContent = ""
+  } 
+
  
-  
-  
 }
+
 
 //reveal to cheat
 // console.log(gameBoard);
-
-
 
 
 
