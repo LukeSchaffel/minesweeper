@@ -45,6 +45,13 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ 
     ]
   revealed = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -55,6 +62,14 @@ function init() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+ 
     ] 
 
   messageEl.textContent = 'Left Click to Choose a Square. Right Click to Place a Flag!'  
@@ -142,8 +157,20 @@ function handleRightClick(evt) {
 function handleClick(evt) {
   
   let cell = evt.target
-  let x = parseInt(evt.target.id[1])
-  let y = parseInt(evt.target.id[0])
+  let x
+  let y
+  if (cell.id.length === 2) {
+    x = parseInt(evt.target.id[1])  
+    y = parseInt(evt.target.id[0])
+  } else {
+    x = parseInt(evt.target.id[2])
+    y = `${evt.target.id[0]}` + `${evt.target.id[1]}`
+  }
+  
+  console.log(y);
+
+
+
   
 
   if (cell.value === -1) {
@@ -212,7 +239,7 @@ function checkN(x, y) {
 }
 function checkNE(x, y) {
  
-  if (y > 0 && x<9) {
+  if (y > 0 && x<gameBoard[0].length-1) {
     return {
       name: 'northEast',
       value: gameBoard[y-1][x+1],
@@ -248,7 +275,7 @@ function checkW(x, y) {
 }
 function checkE(x, y) {
   
-  if (x<9) {
+  if (x<gameBoard[0].length) {
     return {
       name: 'east',
       value: gameBoard[y][x+1],
@@ -266,7 +293,7 @@ function checkE(x, y) {
 }
 function checkSW(x, y) {
   
-  if (y < 7 && x > 0) {
+  if (y < gameBoard.length-1 && x > 0) {
     return {
       name: 'southWest',
       value: gameBoard[y+1][x-1],
@@ -284,7 +311,7 @@ function checkSW(x, y) {
 }
 function checkS(x, y) {
 
-  if (y < 7) {
+  if (y < gameBoard.length-1) {
     return {
       name: 'south',
       value: gameBoard[y+1][x],
@@ -302,7 +329,7 @@ function checkS(x, y) {
 }
 function checkSE(x, y) {
 
-  if (y < 7 && x < 7) {
+  if (y < gameBoard.length-1 && x < gameBoard[0].length-1) {
     return {
       name: 'southEast',
       value: gameBoard[y+1][x+1],
@@ -418,7 +445,7 @@ function restart() {
   boardEl.innerText = ""
   init()
   boardEl.addEventListener('click', handleClick)
-  boardEl.addEventListener('contextmenu', placeflag)
+  boardEl.addEventListener('contextmenu', handleRightClick)
 }
 
 
@@ -426,7 +453,7 @@ function renderWinLoss() {
   if (winner === true) {
   messageEl.innerHTML = "You Win! Congrats!"  
   boardEl.removeEventListener('click', handleClick)
-  boardEl.removeEventListener('contextmenu', placeflag)
+  boardEl.removeEventListener('contextmenu', handleRightClick)
   replayButton.removeAttribute('hidden')
   pictureDiv.innerHTML = '<img src="images/arangutan-monkey.gif" alt="">'
   }
@@ -440,7 +467,7 @@ function renderWinLoss() {
     })
     messageEl.innerText = "You Lose =("
     boardEl.removeEventListener('click', handleClick)
-    boardEl.removeEventListener('contextmenu', placeflag)
+    boardEl.removeEventListener('contextmenu', handleRightClick)
     replayButton.removeAttribute('hidden')
   }
 }
